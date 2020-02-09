@@ -49,5 +49,16 @@ class Vector(object):
         else:
             raise Exception("must have the same size")
     
-
-
+    def __mul__(self, other):
+        if isinstance(other, float) or isinstance(other, int):
+            ans = [c*other for c in self.__components]
+            return ans
+        elif (isinstance(other, Vector) and (len(self) == len(other))):
+            size = len(self)
+            summe = 0
+            for i in range(size):
+                summe += self.__components[i] * other.component(i)
+            return summe
+        else:
+            raise Exception("invalide operand!")
+        
