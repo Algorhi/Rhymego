@@ -32,7 +32,7 @@ class Vector(object):
         assert (-len(self.__components) <= pos <len(self.__components))
         self.__components[pos] = value
 
-    def__add__(self, other):
+    def __add__(self, other):
         size = len(self)
         if size == len(other):
             result = [self.__components[i] +
@@ -42,7 +42,8 @@ class Vector(object):
             raise Exception("must have the same size")
 
     def __sub__(self, other):
-        size = len(other):
+        size = len(self)
+        if size == len(other):
             result = [self.__components[i] -
                     other.component(i) for i in range(size)]
             return result
@@ -62,3 +63,12 @@ class Vector(object):
         else:
             raise Exception("invalide operand!")
         
+    def zeroVector(dimension):
+        assert(isinstance(dimension, int))
+        return Vector([0]*dimension)
+
+    def unitBasisVector(dimension, pos):
+        assert(isinstance(dimension, int) and (isinstance(pos, int))) 
+        ans = [0]*dimension
+        ans[pos] = 1
+        return Vector(ans)
