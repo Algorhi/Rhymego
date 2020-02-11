@@ -1,16 +1,29 @@
+/******************************************
+Flisysdyna: Flight System Dynamics Simulation
+******************************************/
+
 #include <stdio.h>
 #include <iostream>
-#include "CComplex.h"
-//不支持模板类的分类编译，所以要讲 包括进来，在原来的文件中#progma once
-#include "CComplex.cpp"
-#include <string>
+#include <iomanip>
+#include <cmath>
+#include "Mathkit.h"
+#include "RunFlight.h"
+
+#include "Matrix.h"
 using namespace std;
-
+using namespace mathkit;
 int main(){
-  string s;
-  CComplex<int> a(1,2);
-  cout<<a.ToString()<<endl;
-  printf("Done!");
+  double ys[] = {4,9,16,25};
+  Cmatrix M(2,2,ys);
+  Cmatrix C = M.Pow(0.5);
+  Cmatrix TD = M.Transpose();
+  Cmatrix TD = TD.GetTransposed();
+  //GetTransposed Transpose
+  int rank = C.rank();
+  printf("%d\n",rank);
 
-  return 0;
+
+  for (int i = 0;i < 4; i++)
+    cout << " y(" << i << " ) = " << setw(8) << *(TD.GetData() + i);
+  printf("\n%f\n",*(C.GetData() + 1));
 }
